@@ -4,9 +4,16 @@ const app = express();
 const PORT = 2022;
 http.createServer(app).listen(PORT);
 
+/* setup view engine */
+app.set('view engine', 'ejs');
+app.set('views', './src/views');
+
+/* setup static files */
+app.use('/src/public' ,express.static('./src/public'));
+
 /* Routers */
-app.use('/', require('./src/routers/userManagment'));
 app.use('/' , require('./src/routers/posts'));
+app.use('/' , require('./src/routers/renderer'));
 
 /* Other Requests */
 app.get('*', (req, res, next) => {
@@ -32,7 +39,7 @@ res.status(500).json({error: true, message: "Error!", data: []});
 });
 
 /* URL Log */
-// console.log(`Server running at http://127.0.0.1:${PORT}/`);
+console.log(`Server running at http://127.0.0.1:${PORT}/`);
 
-module.exports = app;
+module.exports = app
 

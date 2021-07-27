@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monzer Omer</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="../src/public/css/main.css">
 </head>
 <body>
 <!-- NavBar -->
   <nav class="navbar navbar-expand-md navbar-light  navbar-custom">
-    <a class="navbar-brand" href="/"><img src="./Alimnysolid.png" alt="ALIMNY LOGO" width="87" height="25"></a>
+    <a class="navbar-brand" href="/"><img src="../src/public/images/Alimnysolid.png" alt="ALIMNY LOGO" width="87" height="25"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -20,7 +20,7 @@
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="./new.html">New Blog</a>
+              <a class="nav-link" href="./new">New Blog</a>
           </li>
         </ul>
     </div>
@@ -34,84 +34,49 @@
   
   <h1 class="titleOne">Last post:</h1>
 <hr>
-  <a class="topost" href="./post.html" target="_blank" rel="noopener noreferrer">
+<% if (posts.length >= 1) { %>
+   <a class="topost" href="/post?id=<%= posts[posts.length-1].id %>"  rel="noopener noreferrer">
   <div class="lastpost">
   <div class="row">
   <div class="col-sm-8 post">
-  <p class="posttitle">Get Started!<span class="postdate">2000-10-26</span></p>
+  <p class="posttitle"><%= posts[posts.length-1].title %> <span class="postdate"><%= posts[posts.length-1].body %></span></p>
   
-  <p class="postbody">How to get started?</p>
+  <p class="postbody"><%= posts[posts.length-1].createdAt %></p>
 </div>
 <div class="col-sm-4 image">
-  <img class="photo" src="./pexels-polina-zimmerman-3747468.jpg" alt="image" width="330" height="243">
+  <img class="photo" src="./<%= posts[posts.length-1].image %>" alt="image" width="330" height="243">
 </div>
 </div>
 </div>
 </a>
+<% } else { %>
+  No Posts Yet
+ <% } %>
 <!-- End Last Post -->
 
 <!-- All Posts -->
 <h1 class="titleOne">All Posts:</h1>
 <hr>
-<a class="topost" href="http://" target="_blank" rel="noopener noreferrer">
-<div class="lastpost">
+<% if (posts.length >= 1) { %>
+<% for( let index = 0; index < posts.length; index++ ) { %>
+   <a class="topost" href="/post?id=<%= posts[index].id %>"  rel="noopener noreferrer">
+  <div class="lastpost">
   <div class="row">
   <div class="col-sm-8 post">
-  <p class="posttitle">Get Started!<span class="postdate">2000-10-26</span></p>
+  <p class="posttitle"><%= posts[index].title %> <span class="postdate"><%= posts[index].body %></span></p>
   
-  <p class="postbody">How to get started?</p>
+  <p class="postbody"><%= posts[index].createdAt %></p>
 </div>
 <div class="col-sm-4 image">
-  <img class="photo" src="./pexels-polina-zimmerman-3747468.jpg" alt="image" width="364" height="243">
+  <img class="photo" src="<%= posts[index].image %>" alt="image" width="330" height="243">
 </div>
 </div>
 </div>
 </a>
-
-<a class="topost" href="http://" target="_blank" rel="noopener noreferrer">
-<div class="lastpost">
-  <div class="row">
-  <div class="col-sm-8 post">
-  <p class="posttitle">Get Started!<span class="postdate">2000-10-26</span></p>
-  
-  <p class="postbody">How to get started?</p>
-</div>
-<div class="col-sm-4 image">
-  <img class="photo" src="./pexels-polina-zimmerman-3747468.jpg" alt="image" width="364" height="243">
-</div>
-</div>
-</div>
-</a>
-
-<a class="topost" href="http://" target="_blank" rel="noopener noreferrer">
-<div class="lastpost">
-  <div class="row">
-  <div class="col-sm-8 post">
-  <p class="posttitle">Get Started!<span class="postdate">2000-10-26</span></p>
-  
-  <p class="postbody">How to get started?</p>
-</div>
-<div class="col-sm-4 image">
-  <img class="photo" src="./pexels-polina-zimmerman-3747468.jpg" alt="image" width="364" height="243">
-</div>
-</div>
-</div>
-</a>
-
-<a class="topost" href="http://" target="_blank" rel="noopener noreferrer">
-<div class="lastpost">
-  <div class="row">
-  <div class="col-sm-8 post">
-  <p class="posttitle">Get Started!<span class="postdate">2000-10-26</span></p>
-  
-  <p class="postbody">How to get started?</p>
-</div>
-<div class="col-sm-4 image">
-  <img class="photo" src="./pexels-polina-zimmerman-3747468.jpg" alt="image" width="364" height="243">
-</div>
-</div>
-</div>
-</a>
+<% } %>
+<% } else { %>
+  No Posts Yet
+ <% } %>
 <!-- End All Posts -->
 </div>
 
@@ -130,7 +95,7 @@
       <div class="col-md-6 mt-md-0 mt-3">
 
         <!-- Content -->
-        <a class="navbar-brand" href="/"><img src="../Alimny solid.png" alt="ALIMNY LOGO" width="87" height="25"></a>
+        <a class="navbar-brand" href="/"><img src="../src/public/images/Alimnysolid.png" alt="ALIMNY LOGO" width="87" height="25"></a>
   
 
       </div>
